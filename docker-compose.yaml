@@ -1,0 +1,13 @@
+version: "3"
+services:
+  corruption_buster_frontend:
+    image: ghcr.io/lewynation/corruption_buster_frontend:sha-a0f7bdd
+    container_name: "corruption_buster_frontend"
+    restart: always
+    networks:
+      - corruption_buster
+    ports:
+      - "6065:3000"
+networks:
+  corruption_buster:
+    external: true

@@ -9,31 +9,31 @@ import image7 from "@/assets/images/corruption07.jpg";
 export const slideImages = [
   {
     image: image1,
-    title: "Transparency\nis Key",
+    title: "Transparency\nis Key🗝️",
     description:
       "Ensuring openness in all dealings to\nbuild trust and accountability in our institutions.",
   },
   {
     image: image2,
-    title: "Empowering\nWhistleblowers",
+    title: "Empowering\nWhistleblowers🍃",
     description:
       "Providing a safe and anonymous platform for\nreporting corrupt practices without fear of retaliation.",
   },
   {
     image: image7,
-    title: "Promoting\nEthical Standards",
+    title: "Promoting\nEthical Standards⚖️",
     description:
       "Advocating for integrity and ethical behavior\nin both public and private sectors.",
   },
   {
     image: image4,
-    title: "Fostering\nCivic Engagement",
+    title: "Fostering\nCivic Engagement🗣️",
     description:
       "Encouraging active citizen participation\nin governance to keep authorities accountable.",
   },
   {
     image: image6,
-    title: "Educating for Change",
+    title: "Educating for Change🏫",
     description:
       "Raising awareness about the impacts of corruption and \neducating the public on how to combat it.",
   },

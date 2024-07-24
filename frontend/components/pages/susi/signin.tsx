@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import corruption from "@/components/pages/susi/images/corruption.jpeg";
+import kenyaLogo from "./images/kenya-logo.png";
 
 export function LoginForm() {
   return (
@@ -12,6 +13,15 @@ export function LoginForm() {
       <div className="flex items-center justify-center py-12">
         <div className="mx-auto grid w-[350px] gap-6">
           <div className="grid gap-2 text-center">
+            <div className="flex items-center justify-center w-full">
+              <Link href="/">
+                <Image
+                  src={kenyaLogo}
+                  alt="logo"
+                  className="w-14 h-14 object-contain"
+                />
+              </Link>
+            </div>
             <h1 className="text-3xl font-bold">Login</h1>
             <p className="text-balance text-muted-foreground">
               Enter your email below to login to your account

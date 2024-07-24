@@ -19,12 +19,12 @@ const Header = () => {
       <div className="flex justify-between h-[90px] px-5 md:px-12 items-center max-w-screen-xl mx-auto">
         <Link
           href="/"
-          className="text-2xl text-black flex items-center gap-2 md:text-2xl font-outfit"
+          className="text-xl text-black flex items-center gap-2 md:text-2xl font-outfit"
         >
           <Image
             src={kenyaLogo}
             alt="logo"
-            className="w-14 h-14 object-contain"
+            className="w-10 h-10 md:w-14 md:h-14 object-contain"
           />
           <span>Corruption Buster</span>
         </Link>
@@ -47,7 +47,7 @@ const Header = () => {
               </li>
               <li className="">
                 <Button variant="link" asChild>
-                  <Link href="/" className="text-base font-outfit">
+                  <Link href="/politicians" className="text-base font-outfit">
                     Politicians
                   </Link>
                 </Button>
@@ -60,7 +60,9 @@ const Header = () => {
                 </Button>
               </li>
               <li className="">
-                <Button>Login</Button>
+                <Button asChild>
+                  <Link href="login">Login</Link>
+                </Button>
               </li>
             </ul>
           </div>
@@ -74,6 +76,7 @@ const Header = () => {
             <DropdownMenuContent>
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuSeparator />
+              <DropdownMenuItem>My Profile</DropdownMenuItem>
               <DropdownMenuItem>Logout</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

@@ -21,7 +21,7 @@ const HomeLanding = () => {
                   }}
                 >
                   <section className="absolute flex flex-col gap-3 bottom-20 left-4 md:left-10">
-                    <p className="text-8xl font-bold text-white font-montserrat text-start">
+                    <p className="md:text-8xl text-5xl font-bold text-white font-montserrat text-start">
                       {addLineBreak(slideImages[index].title)}
                     </p>
                     <p className="text-2xl text-white text-start">

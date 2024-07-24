@@ -3,11 +3,9 @@ name: Publish Backend Website
 on:
   push:
     branches: ["master"]
-    paths-ignore:
-      - "build/**"
-      - ".vscode/**"
-      - ".github/workflows/frontend.yml"
-      - "frontend/**"
+    paths:
+      - ".github/workflows/backend.yml"
+      - "backend/**"
 
 env:
   REGISTRY: ghcr.io

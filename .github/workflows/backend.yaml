@@ -1,4 +1,4 @@
-name: Publish Frontend Website
+name: Publish Backend Website
 
 on:
   push:
@@ -46,7 +46,6 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: ./backend
-          file: ./Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}

@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import change from "./images/change1.jpg";
 import { Button } from "@/components/ui/button";
+import SocketModal from "@/components/shared/socket_modal/socket_modal";
 
 const BecomeTheChangeYouWant = () => {
   return (
@@ -9,6 +10,7 @@ const BecomeTheChangeYouWant = () => {
       <div className="mb-10 md:mb-0">
         <p>How can i get information?</p>
         <h1 className="text-4xl">Become the change you want.</h1>
+        <SocketModal />
         <Button className="my-3">Ask Our Bot</Button>
       </div>
       <div className="flex flex-col">

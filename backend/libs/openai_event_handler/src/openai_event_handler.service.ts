@@ -26,17 +26,19 @@ export class OpenAiEventEventHandlerService {
   private observeStream(stream: AssistantStream) {
     this.currentStream = stream
       .on('textDelta', (e) => {
-        console.log('Text DELTA😁😁', e.value);
         this.corruptionSocket.sendUserDeltaMessage(
           this.currentUserId,
           e.value ?? '',
         );
       })
-      .on('textDone', (e) => {
-        console.log('TEXT DONE🚀🚀', e.value);
+      .on('textCreated', (e) => {
+        this.corruptionSocket.sendTextCreated(
+          this.currentUserId,
+          e.value ?? '',
+        );
       })
       .on('end', () => {
-        console.log('🔚🔚 End');
+        this.corruptionSocket.sendMessageEnd(this.currentUserId);
       });
     return stream.finalMessages();
   }

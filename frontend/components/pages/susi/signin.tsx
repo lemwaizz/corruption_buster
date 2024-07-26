@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 
@@ -6,8 +8,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import corruption from "@/components/pages/susi/images/corruption.jpeg";
 import kenyaLogo from "./images/kenya-logo.png";
+import { signInWithGoogle } from "@/firebase/auth";
 
 export function LoginForm() {
+  const loginWithGoogle = async () => {
+    await signInWithGoogle();
+  };
+
   return (
     <div className="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
       <div className="flex items-center justify-center py-12">
@@ -46,7 +53,11 @@ export function LoginForm() {
             <Button type="submit" className="w-full">
               Login
             </Button>
-            <Button variant="outline" className="w-full">
+            <Button
+              variant="outline"
+              className="w-full"
+              onClick={loginWithGoogle}
+            >
               Login with Google
             </Button>
           </div>

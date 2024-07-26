@@ -9,7 +9,11 @@ import {
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 import { CommunicationServerToClientEvents } from './types/events';
-import { MESSAGE_DELTA_CREATED } from '@app/constants';
+import {
+  MESSAGE_DELTA_CREATED,
+  MESSAGE_END,
+  TEXT_CREATED,
+} from '@app/constants';
 
 @WebSocketGateway({
   namespace: 'corruption',
@@ -40,11 +44,18 @@ export class CorruptionSocketGateway
   server: Server<any, CommunicationServerToClientEvents>;
 
   handleConnection(client: Socket) {
-    client.join(client.data.user['userId']);
     console.log(`Client of id ${client.id} connected`);
   }
 
   sendUserDeltaMessage(userId: string, message: string) {
     this.server.to(userId).emit(MESSAGE_DELTA_CREATED, message);
+  }
+
+  sendMessageEnd(userId: string) {
+    this.server.to(userId).emit(MESSAGE_END, 'end');
+  }
+
+  sendTextCreated(userId: string, message: string) {
+    this.server.to(userId).emit(TEXT_CREATED, message);
   }
 }

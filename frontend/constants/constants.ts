@@ -38,3 +38,10 @@ export const slideImages = [
       "Raising awareness about the impacts of corruption and \neducating the public on how to combat it.",
   },
 ];
+
+export const botExampleQuestions = [
+  "Who are some of the corrupt leaders in Kenya?",
+  "How does corruption affect the country's economy?",
+  "What can i do to stop corruption?",
+  "What has the govenment done to stop corruption?",
+];

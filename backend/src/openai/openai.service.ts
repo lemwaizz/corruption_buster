@@ -28,6 +28,6 @@ export class OpenaiService {
   async createThread() {
     const client = this.openAiClient.getClient();
     const thread = await client.beta.threads.create();
-    return thread.id;
+    return { threadId: thread.id };
   }
 }

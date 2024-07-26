@@ -8,6 +8,14 @@ services:
       - corruption_buster
     ports:
       - "6065:3000"
+  corruption_buster_backend:
+    image: ghcr.io/lewynation/corruption_buster_backend:sha-a0f7bdd
+    container_name: "corruption_buster_backend"
+    restart: always
+    networks:
+      - corruption_buster
+    ports:
+      - "6066:4000"
 networks:
   corruption_buster:
     external: true

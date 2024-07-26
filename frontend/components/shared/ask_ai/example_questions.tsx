@@ -3,7 +3,7 @@ import React from "react";
 
 const ExampleQuestions = () => {
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-3 my-6">
       <span>EXAMPLE QUESTIONS</span>
       {botExampleQuestions.map((qstn, index) => {
         return (

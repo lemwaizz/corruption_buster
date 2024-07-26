@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { OpenaiService } from './openai.service';
 import { HandleMessageDto } from './dto';
 import { FirebaseAuthGuard } from '@app/guards';
@@ -12,16 +12,17 @@ export class OpenaiController {
   // @UseGuards(FirebaseAuthGuard)
   handleMessage(
     @Body() handleMessageDto: HandleMessageDto,
-    @GetCurrentUserDetails() currentUser: CurrentUser,
+    // @GetCurrentUserDetails() currentUser: CurrentUser,
   ) {
     return this.openAiService.handleMessage(
       handleMessageDto.threadId,
       handleMessageDto.message,
-      currentUser.id,
+      // currentUser.id,
+      '2rBdnYnSUVdrMoJn07M1jygOudC3',
     );
   }
 
-  @Post('thread')
+  @Get('thread')
   // @UseGuards(FirebaseAuthGuard)
   createThread() {
     return this.openAiService.createThread();

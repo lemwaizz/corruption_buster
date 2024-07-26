@@ -2,17 +2,72 @@
 
 import Image from "next/image";
 import Link from "next/link";
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import corruption from "@/components/pages/susi/images/corruption.jpeg";
 import kenyaLogo from "./images/kenya-logo.png";
-import { signInWithGoogle } from "@/firebase/auth";
+import { emailAndPasswordSignIn, signInWithGoogle } from "@/firebase/auth";
+import { useToast } from "@/components/ui/use-toast";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useUser } from "@/hooks";
 
 export function LoginForm() {
+  const router = useRouter();
+  const { toast } = useToast();
+  const [userEmail, setUSerEmail] = useState("");
+  const [userPassword, setUserPassword] = useState("");
+  const user = useUser();
+
+  useEffect(() => {
+    if (!user.user) {
+      return;
+    }
+    router.push("/");
+  }, [user, router]);
+
   const loginWithGoogle = async () => {
-    await signInWithGoogle();
+    try {
+      await signInWithGoogle();
+      // router.push("/");
+      window.location.replace("/");
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "There was an error loging in.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const loginWithEmailAndPassword = async (
+    e: React.FormEvent<HTMLButtonElement>
+  ) => {
+    console.log("signing In");
+    e.preventDefault();
+    if (!userEmail || !userPassword) {
+      toast({
+        title: "Error",
+        description: "Email and Password are required",
+        variant: "destructive",
+      });
+      return;
+    }
+    try {
+      await emailAndPasswordSignIn({
+        email: userEmail,
+        password: userPassword,
+      });
+      // router.push("/");
+      window.location.replace("/");
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "There was an error loging in.",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
@@ -42,15 +97,28 @@ export function LoginForm() {
                 type="email"
                 placeholder="m@example.com"
                 required
+                value={userEmail}
+                onChange={(e) => setUSerEmail(e.target.value)}
               />
             </div>
             <div className="grid gap-2">
               <div className="flex items-center">
                 <Label htmlFor="password">Password</Label>
               </div>
-              <Input id="password" type="password" required />
+              <Input
+                id="password"
+                type="password"
+                required
+                value={userPassword}
+                onChange={(e) => setUserPassword(e.target.value)}
+              />
             </div>
-            <Button type="submit" className="w-full">
+            <Button
+              type="submit"
+              className="w-full"
+              onSubmit={(e) => loginWithEmailAndPassword(e)}
+              onClick={loginWithEmailAndPassword}
+            >
               Login
             </Button>
             <Button

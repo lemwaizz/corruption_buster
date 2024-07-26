@@ -27,7 +27,7 @@ export function useUserSession(initialUser: User | null) {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged((authUser) => {
       if (authUser === null) {
-        router.push("/login");
+        // router.push("/login");
         return;
       }
       setUser(authUser);

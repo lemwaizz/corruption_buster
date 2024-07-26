@@ -16,10 +16,19 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { AskAi } from "../ask_ai";
 import { useUser } from "@/hooks";
+import { signOut } from "@/firebase/auth";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
   const user = useUser();
+  const router = useRouter();
 
+  const logoutClicked = async () => {
+    console.log("Logging out");
+    console.log(user);
+    await signOut();
+    window.location.reload();
+  };
   return (
     <div className="border-b-[1px] border-[#cecece] fixed left-0 right-0 top-0 bg-white z-50">
       <div className="flex justify-between h-[90px] px-5 md:px-12 items-center max-w-screen-xl mx-auto">
@@ -65,7 +74,7 @@ const Header = () => {
                   </Link>
                 </Button>
               </li>
-              {!user && (
+              {!user.user && (
                 <li className="">
                   <Button asChild>
                     <Link href="login">Login</Link>
@@ -74,7 +83,7 @@ const Header = () => {
               )}
             </ul>
           </div>
-          {user && (
+          {user.user && (
             <>
               <AskAi />
               <DropdownMenu>
@@ -88,7 +97,9 @@ const Header = () => {
                   <DropdownMenuLabel>My Account</DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>My Profile</DropdownMenuItem>
-                  <DropdownMenuItem>Logout</DropdownMenuItem>
+                  <DropdownMenuItem onClick={logoutClicked}>
+                    Logout
+                  </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             </>

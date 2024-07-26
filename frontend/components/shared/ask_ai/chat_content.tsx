@@ -1,19 +1,17 @@
 "use client";
 import { useUser } from "@/hooks";
 import React, { useEffect, useState, useRef } from "react";
-import io from "socket.io-client";
 import { UserMessage, AssistantMessage } from "./message_types";
 import ExampleQuestions from "./example_questions";
-const API_URL = "http://localhost:4000/corruption";
+import { AssistantStream } from "openai/lib/AssistantStream.mjs";
+import { TextDelta } from "openai/resources/beta/threads/messages.mjs";
 
 type MessageProps = {
   role: "user" | "assistant";
   text: string;
 };
 
-const socket = io(API_URL, { autoConnect: false, transports: ["websocket"] });
 const ChatContent = () => {
-  const user = useUser();
   const [userInput, setUserInput] = useState("");
   const [messages, setMessages] = useState<MessageProps[]>([]);
   const [inputDisabled, setInputDisabled] = useState(false);
@@ -28,21 +26,22 @@ const ChatContent = () => {
     setMessages((prevMessages) => [...prevMessages, { role, text }]);
   };
 
-  const handleTextDelta = (text: string) => {
+  const handleTextDelta = (text: TextDelta) => {
+    if (text.value == null) return;
     setMessages((prevMessages) => {
       const lastMessage = prevMessages[prevMessages.length - 1];
       const updatedLastMessage = {
         ...lastMessage,
-        text: lastMessage.text + text,
+        text: lastMessage.text + text.value,
       };
       return [...prevMessages.slice(0, -1), updatedLastMessage];
     });
   };
-  const handleTextCreated = (text: string) => {
+  const handleTextCreated = () => {
     appendMessage("assistant", "");
   };
 
-  const handleTextEnd = (text: string) => {
+  const handleTextEnd = () => {
     setInputDisabled(false);
   };
 
@@ -63,43 +62,34 @@ const ChatContent = () => {
 
   useEffect(() => {
     const createThread = async () => {
-      const res = await fetch(`http://localhost:4000/apenai/thread`, {
+      const res = await fetch(`/api/threads`, {
         method: "POST",
       });
       const data = await res.json();
       setThreadId(data.threadId);
     };
-    createThread();
+    createThread().catch((e) => console.error(e));
   }, []);
 
   const sendMessage = async (text: string) => {
-    const response = await fetch(`http://localhost:4000/apenai`, {
+    const response = await fetch(`/api/threads/${threadId}/messages`, {
       method: "POST",
       body: JSON.stringify({
-        threadId: threadId,
-        message: text,
+        content: text,
       }),
     });
-    const data = await response.json();
-    console.log(data);
+    if (response.body === null) return;
+    const stream = AssistantStream.fromReadableStream(response.body);
+    handleReadableStream(stream);
   };
 
-  useEffect(() => {
-    if (socket.connected) return;
-    socket.connect();
-    socket.on("connect", () => {
-      if (!user.user) return;
-      socket.emit("join_room", { room: user.user?.uid });
+  const handleReadableStream = (stream: AssistantStream) => {
+    stream.on("textCreated", handleTextCreated);
+    stream.on("textDelta", (e) => handleTextDelta(e));
+    stream.on("event", (event) => {
+      if (event.event === "thread.run.completed") handleTextEnd();
     });
-    socket.on("message.delta.created", handleTextDelta);
-    socket.on("text.created", handleTextCreated);
-    socket.on("message.end", handleTextEnd);
-    return () => {
-      socket.removeAllListeners();
-      socket.disconnect();
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user]);
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -125,7 +115,7 @@ const ChatContent = () => {
           afresh.
         </p>
       </div>
-      <div className="flex flex-col-reverse flex-1 p-4">
+      <div className="flex flex-col flex-1 p-4 overflow-y-auto">
         {messages.length > 0 ? (
           messages.map((msg, index) => (
             <Message key={index} role={msg.role} text={msg.text} />
@@ -135,7 +125,7 @@ const ChatContent = () => {
         )}
         <div ref={messagesEndRef} />
       </div>
-      <div className="w-full ">
+      <div className="w-full py-2">
         <form onSubmit={(e) => handleSubmit(e)} className="flex w-full gap-4 ">
           <input
             type="text"

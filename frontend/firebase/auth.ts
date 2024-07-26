@@ -6,9 +6,12 @@ import {
   User,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  AuthErrorCodes,
+  AuthError,
 } from "firebase/auth";
 
 import { auth } from "../firebase/clientApp";
+import { createUser } from "@/fetch_calls";
 
 export function onAuthStateChanged(cb: NextOrObserver<User>) {
   return _onAuthStateChanged(auth, cb);
@@ -18,9 +21,19 @@ export async function signInWithGoogle() {
   const provider = new GoogleAuthProvider();
   try {
     const creds = await signInWithPopup(auth, provider);
-    // Send the user to the server
+    if (
+      creds.user.metadata.creationTime === creds.user.metadata.lastSignInTime
+    ) {
+      // await createUser({
+      //   email: creds.user.email!,
+      //   id: creds.user.uid,
+      //   firstName: creds.user.displayName ?? "",
+      //   imageUrl: creds.user.photoURL,
+      // });
+    }
   } catch (error) {
     console.error("Error signing in with Google", error);
+    throw error;
   }
 }
 
@@ -36,6 +49,7 @@ export async function emailAndPasswordSignIn(userCreds: {
     );
   } catch (error) {
     console.error("Error signing in with email and password", error);
+    throw error;
   }
 }
 
@@ -51,13 +65,19 @@ export async function emailAndPasswordSignUp(userCreds: {
       userCreds.email,
       userCreds.password
     );
-    // Send the user to the server
-    console.log(creds.user.email);
-    console.log(creds.user.photoURL);
-    console.log(creds.user.uid);
-    console.log(creds.user.displayName);
+    // await createUser({
+    //   email: creds.user.email!,
+    //   id: creds.user.uid,
+    //   firstName: userCreds.firstName,
+    //   lastName: userCreds.lastName,
+    //   imageUrl: creds.user.photoURL,
+    // });
   } catch (error) {
-    console.error("Error signiup in with email and password", error);
+    console.error(
+      "Error signiup in with email and password"
+      // (error as AuthError)["message"]
+    );
+    throw error;
   }
 }
 
@@ -66,5 +86,6 @@ export async function signOut() {
     return auth.signOut();
   } catch (error) {
     console.error("Error signing out with Google", error);
+    throw error;
   }
 }

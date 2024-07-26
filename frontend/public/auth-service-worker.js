@@ -8016,10 +8016,15 @@
   });
   self.addEventListener("fetch", (event) => {
     const { origin } = new URL(event.request.url);
-    if (origin !== self.location.origin) return;
+    console.log("\u{1FABD}\u{1FABD}\u{1F601} Request going through");
+    console.log("\u{1F3EB}\u2696\uFE0FORIGIN" + origin);
+    if (origin !== self.location.origin) {
+      return;
+    }
     event.respondWith(fetchWithFirebaseHeaders(event.request));
   });
   async function fetchWithFirebaseHeaders(request) {
+    console.log("WE ARE APPENDING HEADERS\u{1F92F}\u{1F92F}");
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const installations = getInstallations(app);

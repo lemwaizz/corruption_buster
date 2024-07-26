@@ -11,6 +11,7 @@ import {
 import { Bot } from "lucide-react";
 import React from "react";
 import ChatContent from "./chat_content";
+import { DialogTitle } from "@radix-ui/react-dialog";
 
 const AskAi = () => {
   return (
@@ -24,6 +25,7 @@ const AskAi = () => {
         </div>
       </SheetTrigger>
       <SheetContent side="bottom" className="h-[90vh]">
+        <DialogTitle></DialogTitle>
         <ChatContent />
       </SheetContent>
     </Sheet>

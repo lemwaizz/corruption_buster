@@ -28,11 +28,16 @@ self.addEventListener("activate", function (event) {
 
 self.addEventListener("fetch", (event) => {
   const { origin } = new URL(event.request.url);
-  if (origin !== self.location.origin) return;
+  console.log("🪽🪽😁 Request going through");
+  console.log("🏫⚖️ORIGIN" + origin);
+  if (origin !== self.location.origin) {
+    return;
+  }
   event.respondWith(fetchWithFirebaseHeaders(event.request));
 });
 
 async function fetchWithFirebaseHeaders(request) {
+  console.log("WE ARE APPENDING HEADERS🤯🤯");
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const installations = getInstallations(app);

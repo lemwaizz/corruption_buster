@@ -17,12 +17,16 @@ export class OpenaiService {
       role: 'user',
       content: `${message}`,
     });
-    this.openApiEventHandlerService.setCurrentContext(userId);
-    const messages = this.openApiEventHandlerService.addMessage(
-      threadId,
-      message,
-    );
-    console.log('MESSAGES💬💬', messages);
+    const stream = client.beta.threads.runs.stream(threadId, {
+      assistant_id: 'asst_nr6gcaMU6jWqhHI1xnaE2lRu',
+    });
+    return stream.toReadableStream();
+    // this.openApiEventHandlerService.setCurrentContext(userId);
+    // const messages = this.openApiEventHandlerService.addMessage(
+    //   threadId,
+    //   message,
+    // );
+    // console.log('MESSAGES💬💬', messages);
   }
 
   async createThread() {

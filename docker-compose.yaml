@@ -1,7 +1,7 @@
 version: "3"
 services:
   corruption_buster_frontend:
-    image: ghcr.io/lewynation/corruption_buster_frontend:sha-a0f7bdd
+    image: ghcr.io/lewynation/corruption_buster_frontend:sha-ac56e83
     container_name: "corruption_buster_frontend"
     restart: always
     networks:
@@ -9,9 +9,11 @@ services:
     ports:
       - "6065:3000"
   corruption_buster_backend:
-    image: ghcr.io/lewynation/corruption_buster_backend:sha-a0f7bdd
+    image: ghcr.io/lewynation/corruption_buster_backend:sha-873cc42
     container_name: "corruption_buster_backend"
     restart: always
+    env_file:
+      - .env.local
     networks:
       - corruption_buster
     ports:

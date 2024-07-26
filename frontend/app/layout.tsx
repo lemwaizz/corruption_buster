@@ -3,6 +3,10 @@ import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { AuthInitializer } from "@/components/shared/auth_initializer";
+import { Toaster } from "@/components/ui/toaster";
+import { getAuthenticatedAppForUser } from "@/firebase/serverApp";
+
+export const dynamic = "force-dynamic";
 
 const inter = Inter({ subsets: ["latin"] });
 const outfit = Outfit({
@@ -16,15 +20,17 @@ export const metadata: Metadata = {
     "Organization geared towards easy access to politician corruption cases",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { currentUser } = await getAuthenticatedAppForUser();
   return (
     <html lang="en">
       <body className={cn(inter.className, outfit.variable)}>
         {children}
+        <Toaster />
         <AuthInitializer initialUser={null} />
       </body>
     </html>

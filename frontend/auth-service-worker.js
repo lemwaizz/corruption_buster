@@ -4,6 +4,14 @@ import { getInstallations, getToken } from "firebase/installations";
 
 // this is set during install
 let firebaseConfig;
+const config = {
+  apiKey: "AIzaSyClzj9XvdIr2qb-De4daqzQ_uRVb5vzuVQ",
+  authDomain: "corruptionbuster-4b32d.firebaseapp.com",
+  projectId: "corruptionbuster-4b32d",
+  storageBucket: "corruptionbuster-4b32d.appspot.com",
+  messagingSenderId: "482627604239",
+  appId: "1:482627604239:web:1e56316d8e0dfb5677f87a",
+};
 
 self.addEventListener("install", (event) => {
   // extract firebase config from query string
@@ -38,7 +46,7 @@ self.addEventListener("fetch", (event) => {
 
 async function fetchWithFirebaseHeaders(request) {
   console.log("WE ARE APPENDING HEADERS🤯🤯");
-  const app = initializeApp(firebaseConfig);
+  const app = initializeApp(config);
   const auth = getAuth(app);
   const installations = getInstallations(app);
   const headers = new Headers(request.headers);

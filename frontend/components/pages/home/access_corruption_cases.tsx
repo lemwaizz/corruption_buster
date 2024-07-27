@@ -1,9 +1,13 @@
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import React from "react";
 
 const AccessCorruptionCases = () => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 max-w-screen-xl mx-auto my-20 md:my-28 gap-6 px-4">
+    <div
+      id="about_us_section"
+      className="grid grid-cols-1 md:grid-cols-2 max-w-screen-xl mx-auto my-20 md:my-28 gap-6 px-4"
+    >
       <div className="flex items-center flex-col mb-6 md:mb-0">
         <h1 className="md:text-6xl text-5xl">
           Kenyan politicians&apos;
@@ -15,7 +19,9 @@ const AccessCorruptionCases = () => {
           Kenyan politician corruption cases by integration a bot to give case
           breakdowns on all the politicians listed in this website.
         </p>
-        <Button className="self-start mt-6">View Politicians</Button>
+        <Button className="self-start mt-6" asChild>
+          <Link href="/politicians">View Politicians</Link>
+        </Button>
       </div>
       <div>
         <div className="grid grid-cols-2 gap-x-4 gap-y-10">

@@ -1441,12 +1441,12 @@
   };
   var ERROR_FACTORY = new ErrorFactory("app", "Firebase", ERRORS);
   var FirebaseAppImpl = class {
-    constructor(options, config, container) {
+    constructor(options, config2, container) {
       this._isDeleted = false;
       this._options = Object.assign({}, options);
-      this._config = Object.assign({}, config);
-      this._name = config.name;
-      this._automaticDataCollectionEnabled = config.automaticDataCollectionEnabled;
+      this._config = Object.assign({}, config2);
+      this._name = config2.name;
+      this._automaticDataCollectionEnabled = config2.automaticDataCollectionEnabled;
       this._container = container;
       this.container.addComponent(new Component(
         "app",
@@ -1501,8 +1501,8 @@
       const name6 = rawConfig;
       rawConfig = { name: name6 };
     }
-    const config = Object.assign({ name: DEFAULT_ENTRY_NAME2, automaticDataCollectionEnabled: false }, rawConfig);
-    const name5 = config.name;
+    const config2 = Object.assign({ name: DEFAULT_ENTRY_NAME2, automaticDataCollectionEnabled: false }, rawConfig);
+    const name5 = config2.name;
     if (typeof name5 !== "string" || !name5) {
       throw ERROR_FACTORY.create("bad-app-name", {
         appName: String(name5)
@@ -1517,7 +1517,7 @@
     }
     const existingApp = _apps.get(name5);
     if (existingApp) {
-      if (deepEqual(options, existingApp.options) && deepEqual(config, existingApp.config)) {
+      if (deepEqual(options, existingApp.options) && deepEqual(config2, existingApp.config)) {
         return existingApp;
       } else {
         throw ERROR_FACTORY.create("duplicate-app", { appName: name5 });
@@ -1527,7 +1527,7 @@
     for (const component of _components.values()) {
       container.addComponent(component);
     }
-    const newApp = new FirebaseAppImpl(options, config, container);
+    const newApp = new FirebaseAppImpl(options, config2, container);
     _apps.set(name5, newApp);
     return newApp;
   }
@@ -1956,9 +1956,9 @@
       return this.isMobile ? this.longDelay : this.shortDelay;
     }
   };
-  function _emulatorUrl(config, path) {
-    debugAssert(config.emulator, "Emulator should always be set here");
-    const { url } = config.emulator;
+  function _emulatorUrl(config2, path) {
+    debugAssert(config2.emulator, "Emulator should always be set here");
+    const { url } = config2.emulator;
     if (!path) {
       return url;
     }
@@ -3111,9 +3111,9 @@
       this.persistence = persistence;
       this.auth = auth;
       this.userKey = userKey;
-      const { config, name: name5 } = this.auth;
-      this.fullUserKey = _persistenceKeyName(this.userKey, config.apiKey, name5);
-      this.fullPersistenceKey = _persistenceKeyName("persistence", config.apiKey, name5);
+      const { config: config2, name: name5 } = this.auth;
+      this.fullUserKey = _persistenceKeyName(this.userKey, config2.apiKey, name5);
+      this.fullPersistenceKey = _persistenceKeyName("persistence", config2.apiKey, name5);
       this.boundEventHandler = auth._onStorageEvent.bind(auth);
       this.persistence._addListener(this.fullUserKey, this.boundEventHandler);
     }
@@ -3453,11 +3453,11 @@
     }
   };
   var AuthImpl = class {
-    constructor(app, heartbeatServiceProvider, appCheckServiceProvider, config) {
+    constructor(app, heartbeatServiceProvider, appCheckServiceProvider, config2) {
       this.app = app;
       this.heartbeatServiceProvider = heartbeatServiceProvider;
       this.appCheckServiceProvider = appCheckServiceProvider;
-      this.config = config;
+      this.config = config2;
       this.currentUser = null;
       this.emulatorConfig = null;
       this.operations = Promise.resolve();
@@ -3483,7 +3483,7 @@
       this.settings = { appVerificationDisabledForTesting: false };
       this.frameworks = [];
       this.name = app.name;
-      this.clientVersion = config.sdkClientVersion;
+      this.clientVersion = config2.sdkClientVersion;
     }
     _initializeWithPersistence(persistenceHierarchy, popupRedirectResolver) {
       if (popupRedirectResolver) {
@@ -4044,13 +4044,13 @@
             if (response.recaptchaKey === void 0) {
               reject(new Error("recaptcha Enterprise site key undefined"));
             } else {
-              const config = new RecaptchaConfig(response);
+              const config2 = new RecaptchaConfig(response);
               if (auth.tenantId == null) {
-                auth._agentRecaptchaConfig = config;
+                auth._agentRecaptchaConfig = config2;
               } else {
-                auth._tenantRecaptchaConfigs[auth.tenantId] = config;
+                auth._tenantRecaptchaConfigs[auth.tenantId] = config2;
               }
-              return resolve(config.siteKey);
+              return resolve(config2.siteKey);
             }
           }).catch((error) => {
             reject(error);
@@ -6715,16 +6715,16 @@
     // test
   ]);
   function getIframeUrl(auth) {
-    const config = auth.config;
+    const config2 = auth.config;
     _assert(
-      config.authDomain,
+      config2.authDomain,
       auth,
       "auth-domain-config-required"
       /* AuthErrorCode.MISSING_AUTH_DOMAIN */
     );
-    const url = config.emulator ? _emulatorUrl(config, EMULATED_IFRAME_PATH) : `https://${auth.config.authDomain}/${IFRAME_PATH}`;
+    const url = config2.emulator ? _emulatorUrl(config2, EMULATED_IFRAME_PATH) : `https://${auth.config.authDomain}/${IFRAME_PATH}`;
     const params = {
-      apiKey: config.apiKey,
+      apiKey: config2.apiKey,
       appName: auth.name,
       v: SDK_VERSION
     };
@@ -6896,11 +6896,11 @@
     const appCheckTokenFragment = appCheckToken ? `#${FIREBASE_APP_CHECK_FRAGMENT_ID}=${encodeURIComponent(appCheckToken)}` : "";
     return `${getHandlerBase(auth)}?${querystring(paramsDict).slice(1)}${appCheckTokenFragment}`;
   }
-  function getHandlerBase({ config }) {
-    if (!config.emulator) {
-      return `https://${config.authDomain}/${WIDGET_PATH}`;
+  function getHandlerBase({ config: config2 }) {
+    if (!config2.emulator) {
+      return `https://${config2.authDomain}/${WIDGET_PATH}`;
     }
-    return _emulatorUrl(config, EMULATOR_WIDGET_PATH);
+    return _emulatorUrl(config2, EMULATOR_WIDGET_PATH);
   }
   var WEB_STORAGE_SUPPORT_KEY = "webStorageSupport";
   var BrowserPopupRedirectResolver = class {
@@ -7283,7 +7283,7 @@
         const appCheckServiceProvider = container.getProvider("app-check-internal");
         const { apiKey, authDomain } = app.options;
         _assert(apiKey && !apiKey.includes(":"), "invalid-api-key", { appName: app.name });
-        const config = {
+        const config2 = {
           apiKey,
           authDomain,
           clientPlatform,
@@ -7292,7 +7292,7 @@
           apiScheme: "https",
           sdkClientVersion: _getClientVersion(clientPlatform)
         };
-        const authInstance = new AuthImpl(app, heartbeatServiceProvider, appCheckServiceProvider, config);
+        const authInstance = new AuthImpl(app, heartbeatServiceProvider, appCheckServiceProvider, config2);
         _initializeAuthInstance(authInstance, deps);
         return authInstance;
       },
@@ -7998,6 +7998,14 @@
 
   // auth-service-worker.js
   var firebaseConfig;
+  var config = {
+    apiKey: "AIzaSyClzj9XvdIr2qb-De4daqzQ_uRVb5vzuVQ",
+    authDomain: "corruptionbuster-4b32d.firebaseapp.com",
+    projectId: "corruptionbuster-4b32d",
+    storageBucket: "corruptionbuster-4b32d.appspot.com",
+    messagingSenderId: "482627604239",
+    appId: "1:482627604239:web:1e56316d8e0dfb5677f87a"
+  };
   self.addEventListener("install", (event) => {
     const serializedFirebaseConfig = new URL(location).searchParams.get(
       "firebaseConfig"
@@ -8025,7 +8033,7 @@
   });
   async function fetchWithFirebaseHeaders(request) {
     console.log("WE ARE APPENDING HEADERS\u{1F92F}\u{1F92F}");
-    const app = initializeApp(firebaseConfig);
+    const app = initializeApp(config);
     const auth = getAuth(app);
     const installations = getInstallations(app);
     const headers = new Headers(request.headers);

@@ -29,6 +29,17 @@ const Header = () => {
     await signOut();
     window.location.reload();
   };
+
+  const contactUsScroll = () => {
+    const section = document.querySelector("#contact_us_section");
+    section?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  const aboutUsScroll = () => {
+    const section = document.querySelector("#about_us_section");
+    section?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
     <div className="border-b-[1px] border-[#cecece] fixed left-0 right-0 top-0 bg-white z-50">
       <div className="flex justify-between h-[90px] px-5 md:px-12 items-center max-w-screen-xl mx-auto">
@@ -54,10 +65,12 @@ const Header = () => {
                 </Button>
               </li>
               <li className="">
-                <Button variant="link" asChild>
-                  <Link href="/" className="text-base font-outfit">
-                    About Us
-                  </Link>
+                <Button
+                  variant="link"
+                  className="text-base font-outfit"
+                  onClick={aboutUsScroll}
+                >
+                  About Us
                 </Button>
               </li>
               <li className="">
@@ -68,10 +81,12 @@ const Header = () => {
                 </Button>
               </li>
               <li className="">
-                <Button variant="link" asChild>
-                  <Link href="/" className="text-base font-outfit">
-                    Contact Us
-                  </Link>
+                <Button
+                  variant="link"
+                  className="text-base font-outfit"
+                  onClick={contactUsScroll}
+                >
+                  Contact Us
                 </Button>
               </li>
               {!user.user && (
@@ -89,14 +104,19 @@ const Header = () => {
               <DropdownMenu>
                 <DropdownMenuTrigger>
                   <Avatar>
-                    <AvatarImage src="https://pbs.twimg.com/profile_images/1661782362575843329/ONgvOyqF_400x400.jpg" />
+                    <AvatarImage
+                      src={
+                        user.user.photoURL ??
+                        "https://hds.hel.fi/images/foundation/visual-assets/placeholders/user-image-l@3x.png"
+                      }
+                    />
                     <AvatarFallback>DP</AvatarFallback>
                   </Avatar>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                   <DropdownMenuLabel>My Account</DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem>My Profile</DropdownMenuItem>
+                  {/* <DropdownMenuItem>My Profile</DropdownMenuItem> */}
                   <DropdownMenuItem onClick={logoutClicked}>
                     Logout
                   </DropdownMenuItem>

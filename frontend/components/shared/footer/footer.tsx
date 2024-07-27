@@ -1,11 +1,23 @@
+"use client";
+import { Button } from "@/components/ui/button";
 import { Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
 import Link from "next/link";
 
 const Footer = () => {
+  const contactUsScroll = () => {
+    const section = document.querySelector("#contact_us_section");
+    section?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  const aboutUsScroll = () => {
+    const section = document.querySelector("#about_us_section");
+    section?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
     <div className="w-full py-2 bg-black md:py-10" id="contact_us_section">
       <div className="grid max-w-screen-xl grid-cols-1 gap-10 px-4 mx-auto my-6 md:grid-cols-2">
-        <div className="">
+        <div className="" id="contact_us_section">
           <h2 className="mb-3 text-2xl font-bold text-white font-roboto text-start">
             Reach Out To Us
           </h2>
@@ -57,27 +69,80 @@ const Footer = () => {
               Politician Categories
             </h2>
             <ul className="flex flex-col items-start md:items-end">
-              <li>Cabinet Secs</li>
-              <li>MPs</li>
-              <li>Governors</li>
-              <li>Women Rep</li>
-              <li>MCAs</li>
+              <li>
+                <Button variant="link" asChild>
+                  <Link href="#" className="text-base font-outfit text-white">
+                    Cabinet Secs
+                  </Link>
+                </Button>
+              </li>
+              <li>
+                <Button variant="link" asChild>
+                  <Link href="#" className="text-base font-outfit text-white">
+                    MPs
+                  </Link>
+                </Button>
+              </li>
+              <li>
+                <Button variant="link" asChild>
+                  <Link href="#" className="text-base font-outfit text-white">
+                    Governors
+                  </Link>
+                </Button>
+              </li>
+              <li>
+                <Button variant="link" asChild>
+                  <Link href="#" className="text-base font-outfit text-white">
+                    Women Rep
+                  </Link>
+                </Button>
+              </li>
+              <li>
+                <Button variant="link" asChild>
+                  <Link href="#" className="text-base font-outfit text-white">
+                    MCAs
+                  </Link>
+                </Button>
+              </li>
             </ul>
           </div>
           <div>
             <h2 className="mb-2 text-lg font-bold text-end">Navigation</h2>
-            <ul className="flex flex-col items-end">
+            <ul className="flex flex-col items-end text-white">
               <li>
-                <Link href="/">Home</Link>
+                <Button variant="link" asChild>
+                  <Link href="/" className="text-base font-outfit text-white">
+                    Home
+                  </Link>
+                </Button>
               </li>
               <li>
-                <Link href="#">About Us</Link>
+                <Button
+                  variant="link"
+                  className="text-base font-outfit text-white"
+                  onClick={aboutUsScroll}
+                >
+                  About Us
+                </Button>
               </li>
               <li>
-                <Link href="/#">Contact Us</Link>
+                <Button
+                  variant="link"
+                  className="text-base font-outfit text-white"
+                  onClick={contactUsScroll}
+                >
+                  Contact Us
+                </Button>
               </li>
               <li>
-                <Link href="/#">Politicians</Link>
+                <Button variant="link" asChild>
+                  <Link
+                    href="/politicians"
+                    className="text-base font-outfit text-white"
+                  >
+                    Politicians
+                  </Link>
+                </Button>
               </li>
             </ul>
           </div>

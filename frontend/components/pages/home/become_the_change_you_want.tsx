@@ -9,7 +9,7 @@ const BecomeTheChangeYouWant = () => {
       <div className="mb-10 md:mb-0">
         <p>How can i get information?</p>
         <h1 className="text-4xl">Become the change you want.</h1>
-        <Button className="my-3">Ask Our Bot</Button>
+        {/* <Button className="my-3">Ask Our Bot</Button> */}
       </div>
       <div className="flex flex-col">
         <hr />

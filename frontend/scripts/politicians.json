@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Hon. (Dr.) Moses M. Wetang'ula",
+    "description": "The Rt. Hon. (DR.) Moses M. Wetang'ula, EGH, MP is the 8th Speaker of the National Assembly of Kenya since independence in 1963. He was elected to the position of Speaker on Thursday, 8th September 2022 during the First Sitting of the National Assembly of the 13th Parliament.The Hon. Speaker Wetangula’s engagement in public service spans across forty years. He began his service in the Judiciary as Magistrate in 1982 and served in various stations across the country including Kithimani, Machakos, Kisii and Rongo. Notably, the Hon. Wetangula joined the judiciary at the same time with his immediate predecessor, Hon. Justin Muturi, EGH.",
+    "imageUrl": "http://www.parliament.go.ke/sites/default/files/articles/speaker_wetangula.jpg",
+    "politicalCategory": [{ "name": "Speaker" }, { "name": "MP" }]
+  },
+  {
+    "name": "Hon. Boss Gladys Jepkosgei",
+    "description": "The Hon. Gladys Boss Shollei, CBS is the Deputy Speaker of the National Assembly having been elected to the position on 8th September 2022. She was first elected to the National Assembly in 2017 as the Woman Representative for Uasin Gishu County and was re-elected in August 2022. During her first term, she served as the Chairperson of the Committee on Delegated Legislation. She is credited with steering the Committee to consider a high number of crucial statutory instruments that saw the input of the National Assembly in critical delegated legislations including key enabling regulations during the COVID-19 pandemic. She also served as a member of the Departmental Committee on Justice & Legal Affairs, the Procedure & House Rules Committee and the Liaison Committee. In exercising her legislative role, The Hon. Boss-Shollei sponsored the Constitution of Kenya (Amendment) (No. 3) Bill, 2019 which sought to ensure that the number of Members of Parliament reflect the requirement of Article 27(8) that not more than two-thirds of the members of elective or appointive bodies shall be of the same gender. The Bill also sought to ensure that the membership of Parliament also reflects the requirement of Article 54(2) of the Constitution that at least five percent of the members of the public in elective and appointive bodies be persons with disabilities. With regard to the Membership of County Assemblies, the proposal sought to limit the number of representative wards to one thousand four hundred and fifty and provide for the election of one woman for at least every two wards in a County for purposes of gender parity and to remove the provision for post-election gender top-up seats.",
+    "imageUrl": "http://www.parliament.go.ke/sites/default/files/articles/ds_shollei_0_0.jpg",
+    "politicalCategory": [{ "name": "Deputy Speaker" }, { "name": "MP" }]
+  },
+  {
+    "name": "Hon. Kimani Ichung’wah",
+    "description": "The Hon. Kimani Ichung’wah, CBS, MP was elected as the Leader of the Majority Party in the 13th Parliament in September, 2022. He is the Member of Parliament for Kikuyu Constituency and a ranking Member of Parliament serving his third consecutive term. Political Career and Key Achievements. The Hon. Kimani Ichung’wah began his political career in 2013 when he was first elected to the 11th Parliament on The National Alliance (TNA) Party ticket. In the 2017 general elections, Hon. Ichung’wah made history as the first Member of Parliament to be elected unopposed under the Constitution of Kenya, 2010. During his first term in Parliament, Hon. Kimani Ichung’wah served as Vice-Chairman of the Public Investments Committee, a member of the Committee on Parliamentary Powers and Privileges and member of the Departmental Committee on Agriculture, Livestock and Co-operatives. He was also nominated to represent Kenya for foreign policy experience and exposure in the International Visitor Leadership Program (IVLP).",
+    "imageUrl": "http://www.parliament.go.ke/sites/default/files/articles/ichungwa.jpg",
+    "politicalCategory": [{ "name": "Majority Whip" }, { "name": "MP" }]
+  },
+  {
+    "name": "Hon. Mohamed Junet Sheikh",
+    "description": "The Hon. Junet Mohamed, CBS, MP was elected as the Minority Party Whip in the 13th Parliament in September 2022. He is the Member of Parliament for Suna East Constituency and a ranking Member of Parliament currently serving his third consecutive term. Political Career and Key Achievements. In 2005, the Hon. Junet Mohamed began his political career when he was nominated as a Councillor and served as Mayor of  Migori County Council.",
+    "imageUrl": "http://www.parliament.go.ke/sites/default/files/articles/Mohamed%20Junet%20Sheikh%20Nuh_0.jpg",
+    "politicalCategory": [{ "name": "Minority whip" }, { "name": "MP" }]
+  },
+  {
+    "name": "Amason Jeffah Kingi",
+    "description": "The Right Honourable Amason Jeffah Kingi, EGH,  Speaker of the Senate, Republic of Kenya is a lawyer by profession, an Advocate of the High Court of Kenya and a member of the Law Society of Kenya. He holds a Law Degree (LLB) from the University of Nairobi and a Diploma in Law from the Kenya School of Law. He is an alumnus of Alliance High School which he joined after undertaking his basic education, first at Kamale Primary School, and then at Kambi ya Waya Primary School, in Magarini, Kilifi County.",
+    "imageUrl": "http://www.parliament.go.ke/sites/default/files/articles/PHOTO-2023-12-13-13-33-29.jpg",
+    "politicalCategory": [{ "name": "Speaker" }, { "name": "Senator" }]
+  },
+  {
+    "name": "Mr. Samuel Njoroge",
+    "description": "Mr. Samuel Njoroge is the current and Seventh Clerk of the National Assembly of Kenya. Mr. Njoroge holds a Masters Degree in Business Administration (MBA) with specialization in Strategic Management from the University of Nairobi. Mr. Njoroge has an adorned history as a Public Officer in the Parliamentary Service, having joined the Service in 2003 as a Cadet Clerk Assistant and rising through ranks occupying various Management positions in the National Assembly such as the Acting Deputy Clerk; Director, Legislative Procedural Services; and Deputy Director, Legislative Procedural Services among others.",
+    "imageUrl": "http://www.parliament.go.ke/sites/default/files/articles/speaker_wetangula.jpg",
+    "politicalCategory": [{ "name": "Clerk" }]
+  }
+]

@@ -7999,12 +7999,12 @@
   // auth-service-worker.js
   var firebaseConfig;
   var config = {
-    apiKey: "AIzaSyClzj9XvdIr2qb-De4daqzQ_uRVb5vzuVQ",
-    authDomain: "corruptionbuster-4b32d.firebaseapp.com",
-    projectId: "corruptionbuster-4b32d",
-    storageBucket: "corruptionbuster-4b32d.appspot.com",
-    messagingSenderId: "482627604239",
-    appId: "1:482627604239:web:1e56316d8e0dfb5677f87a"
+    apiKey: "AIzaSyC7Iw9Ne4OBIkWslxRIsUfYCMdaymfex7M",
+    authDomain: "corruptionbuster-1d4a4.firebaseapp.com",
+    projectId: "corruptionbuster-1d4a4",
+    storageBucket: "corruptionbuster-1d4a4.appspot.com",
+    messagingSenderId: "882522160624",
+    appId: "1:882522160624:web:50bb6109469d7618613135"
   };
   self.addEventListener("install", (event) => {
     const serializedFirebaseConfig = new URL(location).searchParams.get(
@@ -8024,15 +8024,12 @@
   });
   self.addEventListener("fetch", (event) => {
     const { origin } = new URL(event.request.url);
-    console.log("\u{1FABD}\u{1FABD}\u{1F601} Request going through");
-    console.log("\u{1F3EB}\u2696\uFE0FORIGIN" + origin);
     if (origin !== self.location.origin) {
       return;
     }
     event.respondWith(fetchWithFirebaseHeaders(event.request));
   });
   async function fetchWithFirebaseHeaders(request) {
-    console.log("WE ARE APPENDING HEADERS\u{1F92F}\u{1F92F}");
     const app = initializeApp(config);
     const auth = getAuth(app);
     const installations = getInstallations(app);

@@ -10,11 +10,8 @@ export function useUser() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log("USER" + user);
     setLoading(true);
     const unsubscribe = onAuthStateChanged(auth, (authUser) => {
-      console.log(authUser?.uid);
-      console.log("LOADING", loading);
       if (authUser == null) {
         setLoading(false);
         return;

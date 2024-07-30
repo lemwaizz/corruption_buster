@@ -12,6 +12,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/hooks";
+import { addUser } from "@/firebase/firestore/storage";
 
 export function LoginForm() {
   const router = useRouter();
@@ -29,9 +30,7 @@ export function LoginForm() {
 
   const loginWithGoogle = async () => {
     try {
-      await signInWithGoogle();
-      // router.push("/");
-      window.location.replace("/");
+      const creds = await signInWithGoogle();
     } catch (error) {
       toast({
         title: "Error",
@@ -59,7 +58,6 @@ export function LoginForm() {
         email: userEmail,
         password: userPassword,
       });
-      // router.push("/");
       window.location.replace("/");
     } catch (error) {
       toast({

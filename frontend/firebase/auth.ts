@@ -12,6 +12,7 @@ import {
 
 import { auth } from "../firebase/clientApp";
 import { createUser } from "@/fetch_calls";
+import { addUser } from "./firestore/storage";
 
 export function onAuthStateChanged(cb: NextOrObserver<User>) {
   return _onAuthStateChanged(auth, cb);
@@ -20,17 +21,14 @@ export function onAuthStateChanged(cb: NextOrObserver<User>) {
 export async function signInWithGoogle() {
   const provider = new GoogleAuthProvider();
   try {
-    const creds = await signInWithPopup(auth, provider);
-    if (
-      creds.user.metadata.creationTime === creds.user.metadata.lastSignInTime
-    ) {
-      // await createUser({
-      //   email: creds.user.email!,
-      //   id: creds.user.uid,
-      //   firstName: creds.user.displayName ?? "",
-      //   imageUrl: creds.user.photoURL,
-      // });
-    }
+    await signInWithPopup(auth, provider).then(async (cred) => {
+      await addUser({
+        email: cred.user.email!,
+        id: cred.user.uid,
+        firstName: cred.user.displayName ?? "",
+        imageUrl: cred.user.photoURL,
+      });
+    });
   } catch (error) {
     console.error("Error signing in with Google", error);
     throw error;
@@ -65,18 +63,15 @@ export async function emailAndPasswordSignUp(userCreds: {
       userCreds.email,
       userCreds.password
     );
-    // await createUser({
-    //   email: creds.user.email!,
-    //   id: creds.user.uid,
-    //   firstName: userCreds.firstName,
-    //   lastName: userCreds.lastName,
-    //   imageUrl: creds.user.photoURL,
-    // });
+    await addUser({
+      email: creds.user.email!,
+      id: creds.user.uid,
+      firstName: userCreds.firstName,
+      lastName: userCreds.lastName,
+      imageUrl: creds.user.photoURL,
+    });
   } catch (error) {
-    console.error(
-      "Error signiup in with email and password"
-      // (error as AuthError)["message"]
-    );
+    console.error("Error signiup in with email and password");
     throw error;
   }
 }

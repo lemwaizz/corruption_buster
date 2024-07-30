@@ -5,12 +5,12 @@ import { getInstallations, getToken } from "firebase/installations";
 // this is set during install
 let firebaseConfig;
 const config = {
-  apiKey: "AIzaSyClzj9XvdIr2qb-De4daqzQ_uRVb5vzuVQ",
-  authDomain: "corruptionbuster-4b32d.firebaseapp.com",
-  projectId: "corruptionbuster-4b32d",
-  storageBucket: "corruptionbuster-4b32d.appspot.com",
-  messagingSenderId: "482627604239",
-  appId: "1:482627604239:web:1e56316d8e0dfb5677f87a",
+  apiKey: "AIzaSyC7Iw9Ne4OBIkWslxRIsUfYCMdaymfex7M",
+  authDomain: "corruptionbuster-1d4a4.firebaseapp.com",
+  projectId: "corruptionbuster-1d4a4",
+  storageBucket: "corruptionbuster-1d4a4.appspot.com",
+  messagingSenderId: "882522160624",
+  appId: "1:882522160624:web:50bb6109469d7618613135",
 };
 
 self.addEventListener("install", (event) => {
@@ -36,8 +36,6 @@ self.addEventListener("activate", function (event) {
 
 self.addEventListener("fetch", (event) => {
   const { origin } = new URL(event.request.url);
-  console.log("🪽🪽😁 Request going through");
-  console.log("🏫⚖️ORIGIN" + origin);
   if (origin !== self.location.origin) {
     return;
   }
@@ -45,7 +43,6 @@ self.addEventListener("fetch", (event) => {
 });
 
 async function fetchWithFirebaseHeaders(request) {
-  console.log("WE ARE APPENDING HEADERS🤯🤯");
   const app = initializeApp(config);
   const auth = getAuth(app);
   const installations = getInstallations(app);

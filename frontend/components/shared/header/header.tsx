@@ -116,7 +116,9 @@ const Header = () => {
                 <DropdownMenuContent>
                   <DropdownMenuLabel>My Account</DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  {/* <DropdownMenuItem>My Profile</DropdownMenuItem> */}
+                  <DropdownMenuItem>
+                    <Link href="/profile">My Profile</Link>
+                  </DropdownMenuItem>
                   <DropdownMenuItem onClick={logoutClicked}>
                     Logout
                   </DropdownMenuItem>

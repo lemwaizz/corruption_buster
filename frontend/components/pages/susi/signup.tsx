@@ -51,7 +51,6 @@ export function SignUpForm() {
         lastName,
       });
       window.location.replace("/");
-      // router.push("/");
     } catch (error) {
       toast({
         title: "Error",

@@ -1,9 +1,23 @@
+"use client";
 import React from "react";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
-import { politicians } from "@/constants";
+// import { politicians } from "@/constants";
+import useSWR from "swr";
+import { Politician } from "@/types";
+import { getPoliticians } from "@/firebase/firestore/storage";
+import { MoonLoadingSpinner } from "@/components/shared/loading_banner/moon_loader";
 
 const PoiticiansHome = () => {
+  const {
+    data: politicians,
+    isLoading,
+    error,
+  } = useSWR<Politician[]>("/politicians", async () => {
+    const politicians = await getPoliticians();
+    return politicians;
+  });
+
   return (
     <div className="mt-[90px] max-w-screen-xl mx-auto">
       <div className="py-8 md:py-20 px-4">
@@ -13,37 +27,43 @@ const PoiticiansHome = () => {
         </h1>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-20 px-4">
-        {politicians.map(
-          ({ description, imageUrl, name, politicalCategory }, index) => (
-            <SinglePolitician
-              key={index}
-              categories={politicalCategory.map((category) => category.name)}
-              description={description}
-              image={imageUrl}
-              name={name}
-            />
-          )
-        )}
+        {isLoading && <MoonLoadingSpinner />}
+        {politicians &&
+          politicians.map(
+            ({ id, description, imageUrl, name, politicalCategory }, index) => (
+              <SinglePolitician
+                id={id}
+                key={index}
+                categories={politicalCategory.map((category) => category.name)}
+                description={description}
+                image={imageUrl}
+                name={name}
+              />
+            )
+          )}
       </div>
     </div>
   );
 };
+// MoonLoadingSpinner;
 
 interface SinglePoliticianProps {
+  id: string;
   name: string;
   description: string;
   categories: string[];
-  image: StaticImageData;
+  image: string;
 }
 
 const SinglePolitician: React.FC<SinglePoliticianProps> = ({
+  id,
   name,
   image,
   description,
   categories,
 }) => {
   return (
-    <Link href="#">
+    <Link href={`/politicians/${id}`}>
       <div className="shadow-md rounded-xl pt-6">
         <div className="px-6">
           <p className="font-bold text-lg font-outfit">{name}</p>
@@ -58,6 +78,9 @@ const SinglePolitician: React.FC<SinglePoliticianProps> = ({
           <Image
             src={image}
             alt="politician image"
+            width={0}
+            height={0}
+            sizes="100vw"
             className="object-cover w-full h-full rounded-b-xl object-center hover:scale-125 transition-all duration-300"
           />
         </div>
@@ -70,7 +93,7 @@ interface PoliticalCategoryCardProps {
   category: string;
 }
 
-const PoliticalCategoryCard: React.FC<PoliticalCategoryCardProps> = ({
+export const PoliticalCategoryCard: React.FC<PoliticalCategoryCardProps> = ({
   category,
 }) => {
   return (
